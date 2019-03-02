@@ -34,11 +34,13 @@
         </li>
       </ul>
     </div>
+    <shopcart :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"/>
   </div>
 </template>
 
 <script>
 import BScroll from 'better-scroll'
+import Shopcart from '.././shopcart/shopcart'
 
 export default {
   name: 'goods',
@@ -65,7 +67,6 @@ export default {
         let height1 = this.listHeight[i]
         let height2 = this.listHeight[i + 1]
         if (!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {
-          console.log(this.scrollY, height1, height2)
           return i
         }
       }
@@ -99,9 +100,13 @@ export default {
       }
       let foodList = this.$refs.foodWrapper.getElementsByClassName('food-list-hook')
       let el = foodList[index]
-      this.foodsScroll.scrollToElement(el, 300)
+      this.foodsScroll.scrollToElement(el, 100)
     }
-  }
+  },
+  components: {
+    Shopcart
+  },
+  props: ['seller']
 }
 </script>
 
@@ -110,7 +115,7 @@ export default {
 .goods
   position absolute
   top 174px
-  bottom 64px
+  bottom 44px
   display flex
   width 100%
   overflow hidden
